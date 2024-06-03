@@ -10,10 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.domain.model.SignupForm;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -93,4 +97,43 @@ public class HomeController {
         return getUserList(model);
     }
         
+    @PostMapping(value = "/userDetail", params="update")
+    public String postUserDetailUpdate(@ModelAttribute SignupForm form, Model model) {
+        System.out.println("更新ボタンの処理");
+
+        User user = new User();
+        user.setUserId(form.getUserId());
+        user.setPassword(form.getPassword());
+        user.setUserName(form.getUserName());
+        user.setBirthday(form.getBirthday());
+        user.setAge(form.getAge());
+        user.setMarriage(form.isMarriage());
+
+        boolean result = userService.updateOne(user);
+
+        if(result == true) {
+            model.addAttribute("result", "更新成功");
+        }else {
+            model.addAttribute("result", "更新失敗");
+        }
+
+        return getUserList(model);
+    }
+
+    @PostMapping(value = "/userDetail", params = "delete")
+    public String postUserDetailDetele(@ModelAttribute SignupForm form, Model model) {
+        System.out.println("削除ボタンの処理");
+        
+        boolean result = userService.deleteOne(form.getUserId());
+
+        if(result == true) {
+            model.addAttribute("result", "削除成功");
+        }else {
+            model.addAttribute("result", "削除失敗");
+        }
+
+        return getUserList(model);
+    }
+    
+    
 }
