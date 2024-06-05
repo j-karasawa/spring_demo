@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.login.domain.model.SignupForm;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.service.UserService;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {

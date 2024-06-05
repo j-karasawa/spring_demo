@@ -13,14 +13,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.login.domain.model.User;
-import com.example.demo.login.domain.repository.jdbc.UserDaoJdbcImpl;
+import com.example.demo.login.domain.repository.UserDao;
 
 @Service
 public class UserService {
     
     @Autowired
-    @Qualifier("UserDaoJdbcImpl4")
-    UserDaoJdbcImpl dao;
+    @Qualifier("UserDaoNamedJdbcImple")
+    UserDao dao;
 
     public boolean insert(User user) {
         int rowNumber = dao.insertOne(user);
