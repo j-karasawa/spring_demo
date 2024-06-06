@@ -25,8 +25,14 @@ public class UserDaoNamedJdbcImple implements UserDao {
         String sql = "SELECT COUNT(*) FROM m_user";
 
         SqlParameterSource params = new MapSqlParameterSource();
+        
+        Integer result = jdbc.queryForObject(sql, params, Integer.class);
 
-        return jdbc.queryForObject(sql, params, Integer.class);
+        if(result == null) { 
+            return 0;
+        }
+
+        return result;
     }
 
     @Override

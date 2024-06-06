@@ -21,7 +21,11 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public int count() throws DataAccessException {
-        int count = jdbc.queryForObject("SELECT COUNT(*) FROM m_user", Integer.class);
+        Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM m_user", Integer.class);
+
+        if(count == null) {
+            return 0;
+        }
 
         return count;
     }
