@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.login.domain.model.SignupForm;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -146,6 +147,12 @@ public class HomeController {
 
         return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/admin")
+    public String getAdmin(Model model) {
+        model.addAttribute("contents", "login/admin::admin_contents");
+        return "login/homeLayout";
     }
 
 }
